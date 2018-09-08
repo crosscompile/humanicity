@@ -4,12 +4,17 @@ import Img from 'gatsby-image'
 import Vivus from 'vivus'
 import { HumanicityLogoMaroon } from '../components/Logos/Maroon'
 
+const __SERVER__ = typeof window === 'undefined'
+
 class IndexPage extends React.Component {
   state = {
     logoDrawn: false,
+    showLogo: false,
   }
 
   componentDidMount() {
+    this.setState({ showLogo: true })
+
     new Vivus(
       'logo',
       {
@@ -24,7 +29,7 @@ class IndexPage extends React.Component {
     const {
       data: { splash },
     } = this.props
-    const { logoDrawn } = this.state
+    const { showLogo, logoDrawn } = this.state
 
     return (
       <>
@@ -41,6 +46,7 @@ class IndexPage extends React.Component {
           <HumanicityLogoMaroon
             id="logo"
             css={{
+              ...(showLogo ? {} : { display: 'none' }),
               width: '90%',
               height: 'auto',
               maxWidth: 700,
