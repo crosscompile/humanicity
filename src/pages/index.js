@@ -3,8 +3,19 @@ import { css } from 'glamor'
 import Img from 'gatsby-image'
 import Vivus from 'vivus'
 import { Formik, Form, Field } from 'formik'
-import { Spring, animated } from 'react-spring'
+import { Trail, Spring, animated } from 'react-spring'
 import { HumanicityLogoMaroon } from '../components/Logos/Maroon'
+
+css.global('html, body, #___gatsby, #___gatsby > div', {
+  fontFamily:
+    '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif',
+  boxSizing: 'border-box',
+  height: '100%',
+})
+
+css.global('*', {
+  boxSizing: 'inherit',
+})
 
 const encode = data => {
   return Object.keys(data)
@@ -35,16 +46,16 @@ const inputStyle = {
   width: '100%',
 }
 
-const AnimateAfter = ({ condition, from, to, children }) => {
-  if (!condition) {
-    return <div style={from}>{children}</div>
-  }
-  return (
-    <Spring native from={from} to={to}>
-      {style => <animated.div style={style}>{children}</animated.div>}
-    </Spring>
-  )
-}
+// const AnimateAfter = ({ condition, from, to, children }) => {
+//   if (!condition) {
+//     return <div style={from}>{children}</div>
+//   }
+//   return (
+//     <Trail native from={from} to={to}>
+//       {children}
+//     </Trail>
+//   )
+// }
 
 class IndexPage extends React.Component {
   state = {
@@ -56,14 +67,12 @@ class IndexPage extends React.Component {
   componentDidMount() {
     this.setState({ showLogo: true })
 
-    new Vivus(
-      'logo',
-      {
-        duration: 100,
-        animTimingFunction: Vivus.EASE_IN,
-      },
-      () => this.setState({ logoDrawn: true })
-    )
+    new Vivus('logo', {
+      duration: 100,
+      animTimingFunction: Vivus.EASE_IN,
+    })
+
+    setTimeout(() => this.setState({ logoDrawn: true }), 1700)
   }
 
   handleSubmit = values => {
@@ -130,116 +139,134 @@ class IndexPage extends React.Component {
               )}
             </Spring>
           ) : (
-            <AnimateAfter
-              condition={logoDrawn}
+            <Trail
+              native
               from={{ opacity: 0, transform: 'translateY(20px)' }}
-              to={{ opacity: 1, transform: 'translateY(0px)' }}
+              to={{
+                opacity: logoDrawn ? 1 : 0,
+                transform: logoDrawn ? 'translateY(0px)' : 'translateY(20px)',
+              }}
+              keys={['tagline', 'directions', 'form']}
             >
-              <p
-                css={{
-                  color: '#a11d4c',
-                  fontSize: '2rem',
-                  fontWeight: 600,
-                  marginBottom: '3rem',
-                }}
-              >
-                Because customers are people first.
-              </p>
-              <p
-                css={{
-                  fontSize: '1.1rem',
-                  marginBottom: '3rem',
-                  lineHeight: '1.5rem',
-                }}
-              >
-                While we put the finishing touches on our website, send us a
-                hello to learn more about our Human Immersion branding approach.
-              </p>
-              <div>
-                <Formik
-                  initialValues={{ name: '', email: '', message: '' }}
-                  onSubmit={this.handleSubmit}
-                >
-                  <Form
-                    name="contact"
-                    method="post"
-                    data-netlify="true"
-                    data-netlify-honeypot="bot-field"
+              {style => (
+                <animated.div style={style}>
+                  <p
+                    css={{
+                      color: '#a11d4c',
+                      fontSize: '2rem',
+                      fontWeight: 600,
+                      textAlign: 'center',
+                      marginBottom: '3rem',
+                    }}
                   >
-                    <input type="hidden" name="form-name" value="contact" />
-                    <Field
-                      id="name"
-                      name="name"
-                      render={({ field }) => (
-                        <p css={{ marginBottom: '2rem' }}>
-                          <label htmlFor="name" css={labelStyle}>
-                            Name
-                          </label>
-                          <input
-                            type="text"
-                            required={true}
-                            css={inputStyle}
-                            {...field}
-                          />
-                        </p>
-                      )}
-                    />
+                    Because customers are people first.
+                  </p>
+                </animated.div>
+              )}
+              {style => (
+                <animated.div style={style}>
+                  <p
+                    css={{
+                      fontSize: '1.1rem',
+                      marginBottom: '3rem',
+                      lineHeight: '1.5rem',
+                    }}
+                  >
+                    While we put the finishing touches on our website, send us a
+                    hello to learn more about our Human Immersion branding
+                    approach.
+                  </p>
+                </animated.div>
+              )}
+              {style => (
+                <animated.div style={style}>
+                  <Formik
+                    initialValues={{ name: '', email: '', message: '' }}
+                    onSubmit={this.handleSubmit}
+                  >
+                    <Form
+                      name="contact"
+                      method="post"
+                      data-netlify="true"
+                      data-netlify-honeypot="bot-field"
+                    >
+                      <input type="hidden" name="form-name" value="contact" />
+                      <Field
+                        id="name"
+                        name="name"
+                        render={({ field }) => (
+                          <p css={{ marginBottom: '2rem' }}>
+                            <label htmlFor="name" css={labelStyle}>
+                              Name
+                            </label>
+                            <input
+                              type="text"
+                              required={true}
+                              css={inputStyle}
+                              {...field}
+                            />
+                          </p>
+                        )}
+                      />
 
-                    <Field
-                      id="email"
-                      name="email"
-                      render={({ field, form }) => (
-                        <p css={{ marginBottom: '2rem' }}>
-                          <label htmlFor="email" css={labelStyle}>
-                            Email
-                          </label>
-                          <input
-                            type="email"
-                            required={true}
-                            css={inputStyle}
-                            {...field}
-                          />
-                        </p>
-                      )}
-                    />
+                      <Field
+                        id="email"
+                        name="email"
+                        render={({ field, form }) => (
+                          <p css={{ marginBottom: '2rem' }}>
+                            <label htmlFor="email" css={labelStyle}>
+                              Email
+                            </label>
+                            <input
+                              type="email"
+                              required={true}
+                              css={inputStyle}
+                              {...field}
+                            />
+                          </p>
+                        )}
+                      />
 
-                    <Field
-                      id="message"
-                      name="message"
-                      render={({ field }) => (
-                        <p css={{ marginBottom: '2rem' }}>
-                          <label htmlFor="message" css={labelStyle}>
-                            Message
-                          </label>
-                          <textarea css={inputStyle} {...field} />
-                        </p>
-                      )}
-                    />
-                    <div css={{ display: 'flex', justifyContent: 'flex-end' }}>
-                      <button
-                        type="submit"
-                        css={{
-                          background: 'transparent',
-                          padding: '.6rem 1.5rem',
-                          color: '#a11d4c',
-                          cursor: 'pointer',
-                          border: '1px solid #a11d4c',
-                          borderRadius: 3,
-                          fontWeight: 600,
-                          transition: 'all 100ms ease-in',
-                          ':hover': {
-                            color: 'white',
-                            background: '#a11d4c',
-                          },
-                        }}
+                      <Field
+                        id="message"
+                        name="message"
+                        render={({ field }) => (
+                          <p css={{ marginBottom: '2rem' }}>
+                            <label htmlFor="message" css={labelStyle}>
+                              Message
+                            </label>
+                            <textarea css={inputStyle} {...field} />
+                          </p>
+                        )}
+                      />
+                      <div
+                        css={{ display: 'flex', justifyContent: 'flex-end' }}
                       >
-                        Send
-                      </button>
-                    </div>
-                  </Form>
-                </Formik>
-              </div>
-            </AnimateAfter>
+                        <button
+                          type="submit"
+                          css={{
+                            background: 'transparent',
+                            padding: '.6rem 1.5rem',
+                            color: '#a11d4c',
+                            cursor: 'pointer',
+                            border: '1px solid #a11d4c',
+                            borderRadius: 3,
+                            fontWeight: 600,
+                            transition: 'all 100ms ease-in',
+                            ':hover': {
+                              color: 'white',
+                              background: '#a11d4c',
+                            },
+                          }}
+                        >
+                          Send
+                        </button>
+                      </div>
+                    </Form>
+                  </Formik>
+                </animated.div>
+              )}
+            </Trail>
           )}
         </div>
         <div
