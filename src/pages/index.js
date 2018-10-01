@@ -16,6 +16,7 @@ const labelStyle = {
   color: '#a11d4c',
   textTransform: 'uppercase',
   fontSize: '1rem',
+  fontWeight: 500,
   marginBottom: '.5rem',
   letterSpacing: '.025em',
 }
@@ -29,7 +30,7 @@ const inputStyle = {
   outline: 0,
   padding: '.5rem 0',
   background: 'transparent',
-  fontSize: '1rem',
+  fontSize: '1.1rem',
   lineHeight: '1.5rem',
   width: '100%',
 }
@@ -65,16 +66,24 @@ class IndexPage extends React.Component {
     )
   }
 
+  handleSubmit = values => {
+    fetch('/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: encode({ 'form-name': 'contact', ...values }),
+    }).then(() => this.setState({ contactSubmitted: true }))
+  }
+
   render() {
     const {
       data: { splash },
     } = this.props
     const { showLogo, logoDrawn, contactSubmitted } = this.state
 
-    console.log({ contactSubmitted })
-
     return (
-      <div css={{ position: 'relative', height: '100%' }}>
+      <div css={{ position: 'relative', minHeight: '100%' }}>
         <div
           css={{
             width: '100%',
@@ -88,7 +97,7 @@ class IndexPage extends React.Component {
             id="logo"
             role="img"
             css={{
-              ...(showLogo ? {} : { display: 'none' }),
+              ...(showLogo ? {} : { opacity: 0 }),
               width: '100%',
               height: 'auto',
               maxWidth: 700,
@@ -138,106 +147,98 @@ class IndexPage extends React.Component {
               </p>
               <p
                 css={{
+                  fontSize: '1.1rem',
                   marginBottom: '3rem',
+                  lineHeight: '1.5rem',
                 }}
               >
                 While we put the finishing touches on our website, send us a
                 hello to learn more about our Human Immersion branding approach.
               </p>
-              <Formik
-                initialValues={{ name: '', email: '', message: '' }}
-                onSubmit={values => {
-                  fetch('/', {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: encode({ 'form-name': 'contact', values }),
-                  })
-                    .then(() => alert('Success!'))
-                    .catch(error => alert(error))
-
-                  this.setState({ contactSubmitted: true })
-                }}
-              >
-                <Form
-                  name="contact"
-                  method="post"
-                  data-netlify="true"
-                  data-netlify-honeypot="bot-field"
+              <div>
+                <Formik
+                  initialValues={{ name: '', email: '', message: '' }}
+                  onSubmit={this.handleSubmit}
                 >
-                  <input type="hidden" name="form-name" value="contact" />
-                  <Field
-                    id="name"
-                    name="name"
-                    render={({ field }) => (
-                      <p css={{ marginBottom: '2rem' }}>
-                        <label htmlFor="name" css={labelStyle}>
-                          Name
-                        </label>
-                        <input
-                          type="text"
-                          required={true}
-                          css={inputStyle}
-                          {...field}
-                        />
-                      </p>
-                    )}
-                  />
+                  <Form
+                    name="contact"
+                    method="post"
+                    data-netlify="true"
+                    data-netlify-honeypot="bot-field"
+                  >
+                    <input type="hidden" name="form-name" value="contact" />
+                    <Field
+                      id="name"
+                      name="name"
+                      render={({ field }) => (
+                        <p css={{ marginBottom: '2rem' }}>
+                          <label htmlFor="name" css={labelStyle}>
+                            Name
+                          </label>
+                          <input
+                            type="text"
+                            required={true}
+                            css={inputStyle}
+                            {...field}
+                          />
+                        </p>
+                      )}
+                    />
 
-                  <Field
-                    id="email"
-                    name="email"
-                    render={({ field, form }) => (
-                      <p css={{ marginBottom: '2rem' }}>
-                        <label htmlFor="email" css={labelStyle}>
-                          Email
-                        </label>
-                        <input
-                          type="email"
-                          required={true}
-                          css={inputStyle}
-                          {...field}
-                        />
-                      </p>
-                    )}
-                  />
+                    <Field
+                      id="email"
+                      name="email"
+                      render={({ field, form }) => (
+                        <p css={{ marginBottom: '2rem' }}>
+                          <label htmlFor="email" css={labelStyle}>
+                            Email
+                          </label>
+                          <input
+                            type="email"
+                            required={true}
+                            css={inputStyle}
+                            {...field}
+                          />
+                        </p>
+                      )}
+                    />
 
-                  <Field
-                    id="message"
-                    name="message"
-                    render={({ field }) => (
-                      <p css={{ marginBottom: '2rem' }}>
-                        <label htmlFor="message" css={labelStyle}>
-                          Message
-                        </label>
-                        <textarea css={inputStyle} {...field} />
-                      </p>
-                    )}
-                  />
-                  <div css={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <button
-                      type="submit"
-                      css={{
-                        background: 'transparent',
-                        padding: '.6rem 1.5rem',
-                        color: '#a11d4c',
-                        cursor: 'pointer',
-                        border: '1px solid #a11d4c',
-                        borderRadius: 3,
-                        fontWeight: 600,
-                        transition: 'all 100ms ease-in',
-                        ':hover': {
-                          color: 'white',
-                          background: '#a11d4c',
-                        },
-                      }}
-                    >
-                      Send
-                    </button>
-                  </div>
-                </Form>
-              </Formik>
+                    <Field
+                      id="message"
+                      name="message"
+                      render={({ field }) => (
+                        <p css={{ marginBottom: '2rem' }}>
+                          <label htmlFor="message" css={labelStyle}>
+                            Message
+                          </label>
+                          <textarea css={inputStyle} {...field} />
+                        </p>
+                      )}
+                    />
+                    <div css={{ display: 'flex', justifyContent: 'flex-end' }}>
+                      <button
+                        type="submit"
+                        css={{
+                          background: 'transparent',
+                          padding: '.6rem 1.5rem',
+                          color: '#a11d4c',
+                          cursor: 'pointer',
+                          border: '1px solid #a11d4c',
+                          borderRadius: 3,
+                          fontWeight: 600,
+                          transition: 'all 100ms ease-in',
+                          ':hover': {
+                            color: 'white',
+                            background: '#a11d4c',
+                          },
+                        }}
+                      >
+                        Send
+                      </button>
+                    </div>
+                  </Form>
+                </Formik>
+              </div>
             </AnimateAfter>
           )}
         </div>
@@ -256,7 +257,7 @@ class IndexPage extends React.Component {
             alt=""
             imgStyle={{
               objectFit: 'cover',
-              objectPosition: '25% 50%',
+              objectPosition: '50% 50%',
               filter: 'brightness(30%)',
             }}
             outerWrapperClassName={css({ height: '100%' })}
@@ -272,9 +273,7 @@ class IndexPage extends React.Component {
 
 export const query = graphql`
   query IndexQuery {
-    splash: file(
-      relativePath: { eq: "christopher-campbell-28567-unsplash.jpg" }
-    ) {
+    splash: file(relativePath: { eq: "Final_AdobeStock_131374615.jpeg" }) {
       childImageSharp {
         sizes {
           ...GatsbyImageSharpSizes
