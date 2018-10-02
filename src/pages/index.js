@@ -70,9 +70,8 @@ class IndexPage extends React.Component {
 
     setTimeout(() => this.setState({ logoAnimated: true }), 1200)
   }
-
   handleRest = () => {
-    setTimeout(() => this.setState({ taglineAnimated: true }), 800)
+    setTimeout(() => this.setState({ taglineAnimated: true }), 2100)
   }
 
   handleSubmit = values => {
@@ -341,7 +340,7 @@ class IndexPage extends React.Component {
               imgStyle={{
                 objectFit: 'cover',
                 objectPosition: '50% 50%',
-                filter: 'brightness(15%)',
+                filter: 'brightness(30%)',
               }}
               outerWrapperClassName={css({ height: '100%' })}
               css={{
