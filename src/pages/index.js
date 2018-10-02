@@ -55,6 +55,7 @@ const inputStyle = {
 class IndexPage extends React.Component {
   state = {
     logoAnimated: false,
+    logoFilled: false,
     taglineAnimated: false,
     showLogo: false,
     contactSubmitted: false,
@@ -69,9 +70,10 @@ class IndexPage extends React.Component {
     })
 
     setTimeout(() => this.setState({ logoAnimated: true }), 1200)
+    setTimeout(() => this.setState({ logoFilled: true }), 2200)
   }
   handleRest = () => {
-    setTimeout(() => this.setState({ taglineAnimated: true }), 2100)
+    setTimeout(() => this.setState({ taglineAnimated: true }), 2200)
   }
 
   handleSubmit = values => {
@@ -91,6 +93,7 @@ class IndexPage extends React.Component {
     const {
       showLogo,
       logoAnimated,
+      logoFilled,
       taglineAnimated,
       contactSubmitted,
     } = this.state
@@ -161,8 +164,8 @@ class IndexPage extends React.Component {
                   native
                   from={{ opacity: 0, transform: 'translateY(20px)' }}
                   to={{
-                    opacity: logoAnimated ? 1 : 0,
-                    transform: logoAnimated
+                    opacity: logoFilled ? 1 : 0,
+                    transform: logoFilled
                       ? 'translateY(0px)'
                       : 'translateY(20px)',
                   }}
