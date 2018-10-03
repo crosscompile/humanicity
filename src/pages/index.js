@@ -40,9 +40,9 @@ const labelStyle = {
 
 const inputStyle = {
   display: 'block',
-  color: 'white',
+  color: '#ccc',
   border: 0,
-  borderBottom: `1px solid white`,
+  borderBottom: `1px solid #ddd`,
   borderRadius: 0,
   outline: 0,
   padding: '.5rem 0',
@@ -158,36 +158,36 @@ class IndexPage extends React.Component {
               color: 'white',
             }}
           >
-            {!contactSubmitted ? (
-              <>
-                <Spring
-                  native
-                  from={{ opacity: 0, transform: 'translateY(20px)' }}
-                  to={{
-                    opacity: logoFilled ? 1 : 0,
-                    transform: logoFilled
-                      ? 'translateY(0px)'
-                      : 'translateY(20px)',
-                  }}
-                  onRest={this.handleRest}
-                >
-                  {style => (
-                    <animated.p
-                      style={style}
-                      css={{
-                        color: '#a11d4c',
-                        textAlign: 'center',
-                        margin: '0 auto 5rem auto',
-                        fontSize: '1.8rem',
-                        '@media(min-width: 555px)': {
-                          fontSize: '2.3rem',
-                        },
-                      }}
-                    >
-                      Because customers are people first.
-                    </animated.p>
-                  )}
-                </Spring>
+            <>
+              <Spring
+                native
+                from={{ opacity: 0, transform: 'translateY(20px)' }}
+                to={{
+                  opacity: logoFilled ? 1 : 0,
+                  transform: logoFilled
+                    ? 'translateY(0px)'
+                    : 'translateY(20px)',
+                }}
+                onRest={this.handleRest}
+              >
+                {style => (
+                  <animated.p
+                    style={style}
+                    css={{
+                      color: '#ddd',
+                      textAlign: 'center',
+                      margin: '0 auto 5rem auto',
+                      fontSize: '1.8rem',
+                      '@media(min-width: 555px)': {
+                        fontSize: '2.3rem',
+                      },
+                    }}
+                  >
+                    Because customers are people first.
+                  </animated.p>
+                )}
+              </Spring>
+              {!contactSubmitted ? (
                 <Trail
                   native
                   from={{ opacity: 0, transform: 'translateY(20px)' }}
@@ -206,6 +206,7 @@ class IndexPage extends React.Component {
                         fontSize: '1.1rem',
                         marginBottom: '3rem',
                         lineHeight: '1.5rem',
+                        color: '#ddd',
                       }}
                     >
                       While we put the finishing touches on our website, send us
@@ -289,7 +290,7 @@ class IndexPage extends React.Component {
                               css={{
                                 background: '#a11d4c',
                                 padding: '.6rem 1.5rem',
-                                color: 'white',
+                                color: '#ddd',
                                 cursor: 'pointer',
                                 border: '1px solid #a11d4c',
                                 borderRadius: 3,
@@ -304,28 +305,31 @@ class IndexPage extends React.Component {
                     </animated.div>
                   )}
                 </Trail>
-              </>
-            ) : (
-              <Spring
-                native
-                from={{ opacity: 0, transform: 'translateY(20px)' }}
-                to={{ opacity: 1, transform: 'translateY(0px)' }}
-              >
-                {styles => (
-                  <animated.p
-                    style={styles}
-                    css={{
-                      textAlign: 'center',
-                      color: '#a11d4c',
-                      fontSize: '2rem',
-                      margin: '3rem 0',
-                    }}
-                  >
-                    Thank you! We will be in touch.
-                  </animated.p>
-                )}
-              </Spring>
-            )}
+              ) : (
+                <Spring
+                  native
+                  from={{ opacity: 0, transform: 'translateY(20px)' }}
+                  to={{ opacity: 1, transform: 'translateY(0px)' }}
+                >
+                  {styles => (
+                    <animated.p
+                      style={styles}
+                      css={{
+                        textAlign: 'center',
+                        color: '#a11d4c',
+                        marginTop: '8em',
+                        fontSize: '1.8rem',
+                        '@media(min-width: 555px)': {
+                          fontSize: '2.3rem',
+                        },
+                      }}
+                    >
+                      Thank you! We will be in touch.
+                    </animated.p>
+                  )}
+                </Spring>
+              )}
+            </>
           </div>
           <div
             css={{
