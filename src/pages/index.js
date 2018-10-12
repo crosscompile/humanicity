@@ -69,9 +69,10 @@ class IndexPage extends React.Component {
       animTimingFunction: Vivus.EASE_IN,
     })
 
-    setTimeout(() => this.setState({ logoAnimated: true }), 1200)
-    setTimeout(() => this.setState({ logoFilled: true }), 2200)
+    setTimeout(() => this.setState({ logoAnimated: true }), 670)
+    setTimeout(() => this.setState({ logoFilled: true }), 2000)
   }
+
   handleRest = () => {
     setTimeout(() => this.setState({ taglineAnimated: true }), 2200)
   }
@@ -122,8 +123,14 @@ class IndexPage extends React.Component {
         <div
           css={{
             position: 'relative',
-            minHeight: '100%',
+            height: '100%',
+            overflowY: 'scroll',
             fontWeight: 200,
+            margin: 0,
+            border: '.5rem solid #a11d4c',
+            '@media(min-width: 555px)': {
+              border: '1rem solid #a11d4c',
+            },
           }}
         >
           <div
@@ -154,7 +161,7 @@ class IndexPage extends React.Component {
               width: '100%',
               maxWidth: 555,
               margin: '0 auto',
-              padding: '0 1rem 5rem 1rem',
+              padding: '0 1rem 4rem 1rem',
               color: 'white',
             }}
           >
@@ -333,20 +340,33 @@ class IndexPage extends React.Component {
           </div>
           <div
             css={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
+              position: 'fixed',
               zIndex: -1,
+
+              top: '.5rem',
+              left: '.5rem',
+              right: '.5rem',
+              bottom: '.5rem',
+              '@media(min-width: 555px)': {
+                top: '1rem',
+                left: '1rem',
+                right: '1rem',
+                bottom: '1rem',
+              },
             }}
           >
             <Img
               sizes={splash.childImageSharp.sizes}
               alt=""
               imgStyle={{
+                position: 'absolute',
+                top: '0',
+                left: '-50%',
+                transition: 'opacity 0.5s ease 0s',
+                width: '150%',
+                height: '100%',
                 objectFit: 'cover',
-                objectPosition: '50% 50%',
+                objectPosition: '20% 50%',
                 filter: 'brightness(30%)',
               }}
               outerWrapperClassName={css({ height: '100%' })}
