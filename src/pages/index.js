@@ -32,7 +32,6 @@ const structuredData = JSON.stringify({
 })
 
 const labelStyle = {
-  color: '#a11d4c',
   fontSize: '1.1rem',
   marginBottom: '.5rem',
   letterSpacing: '.025em',
@@ -40,9 +39,9 @@ const labelStyle = {
 
 const inputStyle = {
   display: 'block',
-  color: '#ccc',
   border: 0,
-  borderBottom: `1px solid #ddd`,
+  color: '#fff',
+  borderBottom: `1px solid #fff`,
   borderRadius: 0,
   outline: 0,
   padding: '.5rem 0',
@@ -124,12 +123,13 @@ class IndexPage extends React.Component {
           css={{
             position: 'relative',
             height: '100%',
-            overflowY: 'scroll',
+            width: '100%',
             fontWeight: 200,
             margin: 0,
-            border: '.5rem solid #a11d4c',
-            '@media(min-width: 555px)': {
-              border: '1rem solid #a11d4c',
+            '@media(min-width: 700px)': {
+              width: '70%',
+              minWidth: 700,
+              margin: '0 0 0 auto',
             },
           }}
         >
@@ -181,7 +181,6 @@ class IndexPage extends React.Component {
                   <animated.p
                     style={style}
                     css={{
-                      color: '#ddd',
                       textAlign: 'center',
                       margin: '0 auto 5rem auto',
                       fontSize: '1.8rem',
@@ -213,7 +212,6 @@ class IndexPage extends React.Component {
                         fontSize: '1.1rem',
                         marginBottom: '3rem',
                         lineHeight: '1.5rem',
-                        color: '#ddd',
                       }}
                     >
                       While we put the finishing touches on our website, send us
@@ -297,14 +295,14 @@ class IndexPage extends React.Component {
                               css={{
                                 background: '#a11d4c',
                                 padding: '.6rem 1.5rem',
-                                color: '#ddd',
+                                color: '#fff',
                                 cursor: 'pointer',
                                 border: '1px solid #a11d4c',
                                 borderRadius: 3,
                                 transition: 'all 100ms ease-in',
                               }}
                             >
-                              Submit
+                              Send
                             </button>
                           </div>
                         </Form>
@@ -342,16 +340,17 @@ class IndexPage extends React.Component {
             css={{
               position: 'fixed',
               zIndex: -1,
-
-              top: '.5rem',
-              left: '.5rem',
-              right: '.5rem',
-              bottom: '.5rem',
-              '@media(min-width: 555px)': {
-                top: '1rem',
-                left: '1rem',
-                right: '1rem',
-                bottom: '1rem',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              '& img': {
+                filter: 'brightness(40%)',
+              },
+              '@media(min-width: 1000px)': {
+                '& img': {
+                  filter: 'brightness(80%)',
+                },
               },
             }}
           >
@@ -367,7 +366,6 @@ class IndexPage extends React.Component {
                 height: '100%',
                 objectFit: 'cover',
                 objectPosition: '20% 50%',
-                filter: 'brightness(30%)',
               }}
               outerWrapperClassName={css({ height: '100%' })}
               css={{
