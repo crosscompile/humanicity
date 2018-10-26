@@ -18,12 +18,6 @@ css.global('*', {
   boxSizing: 'inherit',
 })
 
-const encode = data => {
-  return Object.keys(data)
-    .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-    .join('&')
-}
-
 const structuredData = JSON.stringify({
   '@context': 'http://schema.org',
   '@type': 'Organization',
@@ -77,12 +71,10 @@ class IndexPage extends React.Component {
   }
 
   handleSubmit = values => {
-    fetch('/', {
+    fetch('https://api.formik.io/v1/form/5bd38b23e6bed80001142e26/submit', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: encode({ 'form-name': 'contact', ...values }),
+      headers: new Headers({ 'content-type': 'application/json' }),
+      body: JSON.stringify(values),
     }).then(() => this.setState({ contactSubmitted: true }))
   }
 
@@ -225,17 +217,7 @@ class IndexPage extends React.Component {
                         initialValues={{ name: '', email: '', message: '' }}
                         onSubmit={this.handleSubmit}
                       >
-                        <Form
-                          name="contact"
-                          method="post"
-                          data-netlify="true"
-                          data-netlify-honeypot="bot-field"
-                        >
-                          <input
-                            type="hidden"
-                            name="form-name"
-                            value="contact"
-                          />
+                        <Form>
                           <Field
                             id="name"
                             name="name"
@@ -343,7 +325,9 @@ class IndexPage extends React.Component {
               top: 0,
               left: 0,
               right: 0,
-              bottom: 0,
+              height: '100vh',
+              // yesssss the hack works
+              transition: 'height 999999s',
               '& img': {
                 filter: 'brightness(40%)',
               },
