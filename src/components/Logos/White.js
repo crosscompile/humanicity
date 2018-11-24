@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export const HumanicityLogoWhite = props => (
   <svg viewBox="0 0 750 155.8" {...props}>
@@ -7,4 +7,4 @@ export const HumanicityLogoWhite = props => (
       fill="#fff"
     />
   </svg>
-)
+);

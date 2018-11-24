@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'Fancy Page Transitions',
+    title: 'Humanicity',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
