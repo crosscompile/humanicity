@@ -1,34 +1,16 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import Img from 'gatsby-image';
 import { css } from 'glamor';
 import { theme } from '../theme';
-import { HumanicityLogoWhite } from '../components/Logos/White';
+import { Logo } from '../components/Logo';
 import { VisuallyHidden } from '../components/VisuallyHidden';
-import { AccentMaroon } from '../components/icons/AccentMaroon';
-import { AccentNavy } from '../components/icons/AccentNavy';
-import { AccentTeal } from '../components/icons/AccentTeal';
+import { SectionImage } from '../components/Section/SectionImage';
+import { SectionText } from '../components/Section/SectionText';
+import { SectionContainer } from '../components/Section/SectionContainer';
 
-const IndexPage = ({ data: { splash } }) => (
-  <div>
+const IndexPage = ({ data: { firstImage, secondImage, thirdImage } }) => (
+  <div {...css({ background: theme.color.offWhite })}>
     <div {...css({ position: 'relative' })}>
-      <Img
-        sizes={splash.childImageSharp.sizes}
-        alt=""
-        imgStyle={{
-          objectPosition: 'center 20%',
-        }}
-        outerWrapperClassName={css({
-          position: 'absolute !important',
-          height: '100%',
-          width: '100%',
-        })}
-        css={{
-          position: 'absolute !important',
-          height: '100%',
-          width: '100%',
-        }}
-      />
       <div
         {...css({
           position: 'relative',
@@ -43,158 +25,82 @@ const IndexPage = ({ data: { splash } }) => (
             maxWidth: 450,
           })}
         >
-          <HumanicityLogoWhite />
+          <Logo {...css({ fill: theme.color.white })} />
           <VisuallyHidden>
             <h1>Humanicity</h1>
           </VisuallyHidden>
         </div>
       </div>
     </div>
-    <div
-      {...css({
+    <SectionContainer
+      override={css({
         background: theme.color.maroon,
       })}
     >
-      <div
-        {...css({
-          color: theme.color.white,
-          margin: '0 auto',
-          padding: `calc(${theme.space.xxlarge} + ${theme.space.large}) ${
-            theme.space.small
-          }`,
-          maxWidth: 800,
-        })}
-      >
-        <span
-          {...css({
-            display: 'flex',
-            alignItems: 'center',
-            fontSize: theme.fontSize.medium,
-          })}
-        >
-          <AccentTeal
-            {...css({
-              marginRight: theme.space.xsmall,
-            })}
-          />
-          Embrace humanicity
-        </span>
-        <h1
-          {...css({
-            marginTop: 0,
-            fontSize: theme.fontSize.xlarge,
-            fontWeight: theme.fontWeight.bold,
-          })}
-        >
-          Leverage Your Humanity
-        </h1>
-        <p {...css({ lineHeight: 1.4, fontSize: theme.fontSize.medium })}>
-          The belief that leveraging your brand’s humanity results in more
-          sustainable customer relationships.
-        </p>
-      </div>
-    </div>
-    <div
-      {...css({
+      <SectionImage
+        sizes={firstImage.childImageSharp.sizes}
+        imgStyle={{
+          objectPosition: '20% center',
+        }}
+      />
+      <SectionText
+        accentColor={theme.color.teal}
+        accent="Embrace humanicity"
+        title="Leverage Your Humanity"
+        summary="The belief that leveraging your brand’s humanity results in more sustainable customer relationships."
+      />
+    </SectionContainer>
+    <SectionContainer
+      override={css({
         background: theme.color.navy,
+        flexDirection: 'column-reverse',
+        [theme.media.medium]: {
+          flexDirection: 'row',
+        },
       })}
     >
-      <div
-        {...css({
-          color: theme.color.white,
-          margin: '0 auto',
-          padding: `calc(${theme.space.xxlarge} + ${theme.space.large}) ${
-            theme.space.small
-          }`,
-          maxWidth: 800,
-        })}
-      >
-        <span
-          {...css({
-            display: 'flex',
-            alignItems: 'center',
-            fontSize: theme.fontSize.medium,
-          })}
-        >
-          <AccentMaroon
-            {...css({
-              marginRight: theme.space.xsmall,
-            })}
-          />
-          Create Humanicity
-        </span>
-        <h1
-          {...css({
-            marginTop: 0,
-            fontSize: theme.fontSize.xlarge,
-            fontWeight: theme.fontWeight.bold,
-          })}
-        >
-          Uncover Emotions
-        </h1>
-        <p {...css({ lineHeight: 1.4, fontSize: theme.fontSize.medium })}>
-          Uncover your customers’ deep emotional motivations for more compelling
-          human expression and engagement.
-        </p>
-      </div>
-    </div>
-    <div
-      {...css({
+      <SectionText
+        accentColor={theme.color.maroon}
+        accent="Create humanicity"
+        title="Uncover Emotions"
+        summary="Uncover your customers’ deep emotional motivations for more compelling human expression and engagement."
+      />
+      <SectionImage sizes={secondImage.childImageSharp.sizes} />
+    </SectionContainer>
+    <SectionContainer
+      override={css({
         background: theme.color.teal,
       })}
     >
-      <div
-        {...css({
-          color: theme.color.white,
-          margin: '0 auto',
-          padding: `calc(${theme.space.xxlarge} + ${theme.space.large}) ${
-            theme.space.small
-          }`,
-          maxWidth: 800,
-        })}
-      >
-        <div>
-          <span
-            {...css({
-              display: 'flex',
-              alignItems: 'center',
-              fontSize: theme.fontSize.medium,
-            })}
-          >
-            <AccentNavy
-              {...css({
-                marginRight: theme.space.xsmall,
-              })}
-            />
-            Our approach
-          </span>
-        </div>
-        <h1
-          {...css({
-            marginTop: 0,
-            fontSize: theme.fontSize.xlarge,
-            fontWeight: theme.fontWeight.bold,
-          })}
-        >
-          Motivation. Expression. Engagement.
-        </h1>
-        <p {...css({ lineHeight: 1.4, fontSize: theme.fontSize.medium })}>
-          Immersive ethnographies that strengthen your purpose and build
-          customer intimacy. Authentic story and empathetic messaging leading
-          stronger customer connections. Your brand’s humanicity engages
-          customers through digital and social technology.
-        </p>
-      </div>
-    </div>
-    <div
-      {...css({ background: theme.color.black, padding: theme.space.xxlarge })}
-    />
+      <SectionImage sizes={thirdImage.childImageSharp.sizes} />
+      <SectionText
+        accentColor={theme.color.navy}
+        accent="Our approach"
+        title="Motivation. Expression. Engagement."
+        summary="Immersive ethnographies that strengthen your purpose and build customer intimacy. Authentic story and empathetic messaging leading stronger customer connections. Your brand’s humanicity engages customers through digital and social technology."
+      />
+    </SectionContainer>
+    <div {...css({ padding: theme.space.xxlarge })} />
   </div>
 );
 
 export const query = graphql`
   query IndexQuery {
-    splash: file(relativePath: { eq: "AdobeStock_33925256.jpeg" }) {
+    firstImage: file(relativePath: { eq: "AdobeStock_33925256.jpeg" }) {
+      childImageSharp {
+        sizes {
+          ...GatsbyImageSharpSizes
+        }
+      }
+    }
+    secondImage: file(relativePath: { eq: "AdobeStock_66406489.jpeg" }) {
+      childImageSharp {
+        sizes {
+          ...GatsbyImageSharpSizes
+        }
+      }
+    }
+    thirdImage: file(relativePath: { eq: "AdobeStock_93912763.jpeg" }) {
       childImageSharp {
         sizes {
           ...GatsbyImageSharpSizes
