@@ -4,6 +4,7 @@ import copernicus from './src/fonts/GalaxieCopernicus-Book.woff';
 
 import 'whatwg-fetch';
 import 'normalize.css';
+import './src/utils/focusStyles';
 
 css.global('body', {
   fontFamily: theme.fontFamily,
