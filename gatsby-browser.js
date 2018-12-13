@@ -9,6 +9,10 @@ import './src/utils/focusStyles';
 css.global('body', {
   fontFamily: theme.fontFamily,
   fontSize: theme.fontSize.root,
+  WebkitTapHighlightColor: 'transparent',
 });
 
-css.global('@font-face', { fontFamily: 'Copernicus', src: copernicus });
+css.global('@font-face', {
+  fontFamily: 'Copernicus',
+  src: `url(${copernicus})`,
+});

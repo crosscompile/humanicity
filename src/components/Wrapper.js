@@ -1,194 +1,150 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 import { css } from 'glamor';
 import Waypoint from 'react-waypoint';
-import Link from 'gatsby-link';
 import { theme } from '../theme';
-import { Logo } from './Logo';
 import { LogoLetter } from './LogoLetter';
-import { VisuallyHidden } from './VisuallyHidden';
-import { Stroke } from './Stroke';
-import { Accent } from './Accent';
+import { StrokeRound } from './Strokes/StrokeRound';
+import { Nav } from './Nav';
 
 export class Wrapper extends React.Component {
   state = { navButtonShown: false, navShown: false };
 
+  waypoint = () => (
+    <Waypoint
+      onEnter={() => this.setState({ navButtonShown: false })}
+      onLeave={() => this.setState({ navButtonShown: true })}
+    />
+  );
+
   render() {
     const { children } = this.props;
     const { navButtonShown, navShown } = this.state;
+
     return (
       <>
+        <Helmet>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+          />
+        </Helmet>
         <div
           {...css({
-            position: 'fixed',
-            zIndex: 200,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            top: theme.space.small,
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-          })}
-        >
-          <button
-            onClick={() =>
-              this.setState(({ navShown }) => ({
-                navShown: !navShown,
-              }))
-            }
-            disabled={!navButtonShown}
-            {...css({
-              border: 'none',
-              background: 'none',
-              padding: 0,
-              display: 'flex',
-              justifyContent: 'center',
-              opacity: navButtonShown ? 100 : 0,
-              cursor: navButtonShown ? 'pointer' : 'default',
-              transition: 'opacity ease-in-out 200ms',
-            })}
-          >
-            <LogoLetter
-              {...css({
-                width: 60,
-                height: 60,
-                fill: theme.color.white,
-                background: theme.color.black,
-                padding: theme.space.small,
-              })}
-            />
-          </button>
-
-          <div
-            {...css({
-              display: 'flex',
-              paddingTop: theme.space.large,
-              opacity: navShown ? 1 : 0,
-              transition: 'opacity ease-in-out 200ms',
-              pointerEvents: navShown ? 'initial' : 'none',
-            })}
-          >
-            <Link
-              to="/about"
-              {...css({
-                textDecoration: 'none',
-                color: 'initial',
-              })}
-            >
-              <Accent
-                {...css({
-                  position: 'relative',
-                  top: -3,
-                  marginRight: theme.space.xsmall,
-                  fill: theme.color.fuschia,
-                })}
-              />
-              <span
-                {...css({
-                  fontSize: theme.fontSize.medium,
-                  fontFamily: 'Copernicus',
-                })}
-              >
-                About
-              </span>
-            </Link>
-            <Link
-              to="/approach"
-              {...css({
-                marginLeft: theme.space.medium,
-                textDecoration: 'none',
-                color: 'initial',
-              })}
-            >
-              <Accent
-                {...css({
-                  position: 'relative',
-                  top: -3,
-                  marginRight: theme.space.xsmall,
-                  fill: theme.color.fuschia,
-                })}
-              />
-              <span
-                {...css({
-                  fontSize: theme.fontSize.medium,
-                  fontFamily: 'Copernicus',
-                })}
-              >
-                Approach
-              </span>
-            </Link>
-            <Link
-              to="/contact"
-              {...css({
-                marginLeft: theme.space.medium,
-                textDecoration: 'none',
-                color: 'initial',
-              })}
-            >
-              <Accent
-                {...css({
-                  position: 'relative',
-                  top: -3,
-                  marginRight: theme.space.xsmall,
-                  fill: theme.color.fuschia,
-                })}
-              />
-              <span
-                {...css({
-                  fontSize: theme.fontSize.medium,
-                  fontFamily: 'Copernicus',
-                })}
-              >
-                Contact
-              </span>
-            </Link>
-          </div>
-        </div>
-        <div
-          {...css({
-            transform: navShown ? 'scale(.9) translateY(30%)' : 'scale(1)',
-            transition: 'transform ease-in-out 200ms',
             height: '100vh',
-            width: '100vw',
-            overflow: 'scroll',
-            position: 'relative',
+            position: navShown ? 'fixed' : 'relative',
+            overflow: 'hidden',
+            background: theme.color.white,
           })}
         >
           <div
             {...css({
-              position: 'relative',
-              background: theme.color.black,
+              position: 'fixed',
               display: 'flex',
+              flexDirection: 'column',
               alignItems: 'center',
-              justifyContent: 'center',
+              transform: 'translateX(-50%)',
+              zIndex: 300,
+              left: '50%',
+              top: theme.space.small,
+              pointerEvents: navButtonShown ? 'initial' : 'none',
+            })}
+          >
+            <div>
+              <button
+                onClick={() =>
+                  this.setState(({ navShown }) => ({
+                    navShown: !navShown,
+                  }))
+                }
+                disabled={!navButtonShown && !navShown}
+                {...css({
+                  position: 'relative',
+
+                  border: 'none',
+                  background: 'none',
+                  padding: 0,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  opacity: navButtonShown || navShown ? 100 : 0,
+                  cursor: navButtonShown || navShown ? 'pointer' : 'default',
+                  transition: 'opacity ease-in-out 200ms',
+                  willChange: 'opacity',
+                })}
+              >
+                <StrokeRound
+                  {...css({
+                    position: 'relative',
+                    top: 0,
+                    width: 100,
+                    transition: 'fill ease-in-out 200ms',
+                    willChange: 'fill',
+                    fill: navShown ? theme.color.black : theme.color.white,
+                    ':hover': {
+                      fill: navShown ? theme.color.black : theme.color.offWhite,
+                    },
+                  })}
+                />
+                <LogoLetter
+                  {...css({
+                    position: 'absolute',
+                    top: '55%',
+                    transform: 'translateY(-50%)',
+                    width: 60,
+                    height: 60,
+                    pointerEvents: 'none',
+                    transition: 'fill ease-in-out 200ms',
+                    willChange: 'fill',
+                    fill: navShown ? theme.color.white : theme.color.fuschia,
+                  })}
+                />
+              </button>
+            </div>
+          </div>
+          <div
+            {...css({
+              position: 'fixed',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              transform: 'translateX(-50%)',
+              zIndex: 100,
+              left: '50%',
+              top: 120,
+            })}
+          >
+            <div
+              {...css({
+                paddingTop: theme.space.large,
+                pointerEvents: navShown ? 'initial' : 'none',
+              })}
+            >
+              <Nav />
+            </div>
+          </div>
+          <div
+            {...css({
+              transform: navShown
+                ? 'scale(.9) translateY(410px) perspective(1800px) rotateX(5deg)'
+                : 'scale(1)',
+              [theme.media.medium]: {
+                transform: navShown
+                  ? 'scale(.9) translateY(220px) perspective(1800px) rotateX(5deg)'
+                  : 'scale(1)',
+              },
+              transition: 'transform ease-in-out 200ms',
               height: '100vh',
               width: '100vw',
+              overflow: 'scroll',
+              cursor: navShown ? 'pointer' : 'default',
+              position: 'relative',
+              zIndex: 200,
+              WebkitOverflowScrolling: navShown ? 'auto' : 'touch',
             })}
+            onClick={() => this.setState({ navShown: false })}
           >
-            <Stroke
-              {...css({
-                position: 'absolute',
-                width: '120%',
-                fill: theme.color.white,
-              })}
-            />
-            <Logo
-              {...css({
-                fill: theme.color.fuschia,
-                width: '80%',
-                maxWidth: 700,
-                height: 'auto',
-                position: 'absolute',
-              })}
-            />
-            <VisuallyHidden>
-              <h1>Humanicity</h1>
-            </VisuallyHidden>
-            <Waypoint
-              onEnter={() => this.setState({ navButtonShown: false })}
-              onLeave={() => this.setState({ navButtonShown: true })}
-            />
+            {children(this.waypoint)}
           </div>
-          {children}
         </div>
       </>
     );
