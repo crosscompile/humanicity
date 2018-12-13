@@ -76,7 +76,10 @@ export class Wrapper extends React.Component {
                   {...css({
                     position: 'relative',
                     top: 0,
-                    width: 100,
+                    width: 75,
+                    [theme.media.medium]: {
+                      width: 100,
+                    },
                     transition: 'fill ease-in-out 200ms',
                     willChange: 'fill',
                     fill: navShown ? theme.color.black : theme.color.white,
@@ -90,8 +93,10 @@ export class Wrapper extends React.Component {
                     position: 'absolute',
                     top: '55%',
                     transform: 'translateY(-50%)',
-                    width: 60,
-                    height: 60,
+                    width: 45,
+                    [theme.media.medium]: {
+                      width: 60,
+                    },
                     pointerEvents: 'none',
                     transition: 'fill ease-in-out 200ms',
                     willChange: 'fill',
@@ -115,7 +120,10 @@ export class Wrapper extends React.Component {
           >
             <div
               {...css({
-                paddingTop: theme.space.large,
+                paddingTop: theme.space.medium,
+                [theme.media.medium]: {
+                  paddingTop: theme.space.large,
+                },
                 pointerEvents: navShown ? 'initial' : 'none',
               })}
             >
