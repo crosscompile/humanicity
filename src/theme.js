@@ -1,22 +1,10 @@
 const color = {
   white: '#fff',
-  offWhite: '#F7FBFB',
-  darken: 'rgba(0,0,0,.25)',
-  black: '#000',
-  opaque: 'rgba(255,255,255,.6)',
-  blue: '#09f',
-  red: '#f44',
-  green: 'rgb(70, 178, 117)',
-  lightblue: '#8df',
-  deepblue: '#05f',
-  oil: '#222',
-  metal: '#444',
-  aluminum: '#666',
-  ash: '#888',
-  gray: '#aaa',
-  platinum: '#bbb',
-  silver: '#ccc',
-  cloud: '#ddd',
+  offWhite: '#C1DEE2',
+  black: '#222',
+  maroon: '#a11d4c',
+  teal: '#1a465b',
+  navy: '#131F2A',
 }
 
 const boxShadow = {
@@ -49,10 +37,13 @@ const fontWeight = {
 }
 
 const fontFamily =
-  '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif, ' +
+  '"Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif, ' +
   '"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"' // emoji fonts
 
-const lineHeight = 1.3125
+const lineHeight = {
+  app: 1.3125,
+  content: 1.88,
+}
 
 const space = {
   xxsmall: '0.25rem',
