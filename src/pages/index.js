@@ -147,7 +147,7 @@ const IndexPage = ({
         we are a brand strategy, messaging and design firm obsessed with
         understanding people. we identify the powerful human connections to
         propel your brand’s growth. humanicity helps you build more sustainable,
-        profitable relationships with your customers.
+        profitable relationships with <nobr>your customers.</nobr>
       </p>
     </div>
     <div css={{ margin: '0 auto', maxWidth: 1200 }}>
@@ -214,8 +214,8 @@ const IndexPage = ({
                 lineHeight: theme.lineHeight.content,
               }}
             >
-              everything starts with building your purpose, promise and point of
-              difference.
+              everything starts with building your purpose, promise and point{' '}
+              <nobr>of difference.</nobr>
             </p>
           </div>
           <div>
@@ -227,7 +227,7 @@ const IndexPage = ({
               }}
             >
               developing brand authentic visuals and language to connect your
-              brand to your customers.
+              brand to <nobr>your customers.</nobr>
             </p>
           </div>
           <div>
@@ -239,7 +239,7 @@ const IndexPage = ({
               }}
             >
               putting your brand’s humanicity into the world leading with
-              digital and social technology.
+              digital and <nobr>social technology.</nobr>
             </p>
           </div>
         </div>
@@ -284,7 +284,7 @@ const IndexPage = ({
       >
         are you launching a new brand? do you need a new purpose and story to
         evolve a current brand? as creators of human connections, we’ll have
-        ideas on what humanicity can do for your brand.
+        ideas on what humanicity can do for <nobr>your brand.</nobr>
       </p>
       <div
         css={{
