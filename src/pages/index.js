@@ -144,7 +144,7 @@ const IndexPage = ({
           lineHeight: theme.lineHeight.content,
         }}
       >
-        we are a brand strategy, messaging and design agency obsessed with
+        we are a brand strategy, messaging and design firm obsessed with
         understanding people. we identify the powerful human connections to
         propel your brand’s growth. humanicity helps you build more sustainable,
         profitable relationships with your customers.
