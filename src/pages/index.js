@@ -18,7 +18,7 @@ const structuredData = JSON.stringify({
 const IndexPage = ({
   data: { firstImage, secondImage, thirdImage, fourthImage },
 }) => (
-  <>
+  <div css={{ width: '100%', overflow: 'hidden', position: 'relative' }}>
     <Helmet
       title="Humanicity"
       meta={[
@@ -31,31 +31,32 @@ const IndexPage = ({
           content: 'Because customers are people first.',
         },
         {
-          property: 'description',
-          content: 'Because customers are people first.',
+          property: 'og:image',
+          content: firstImage.childImageSharp.sizes.src,
         },
       ]}
     >
       <script type="application/ld+json">{structuredData}</script>
     </Helmet>
-    <div
-      css={{
-        position: 'absolute',
-        top: '-50%',
-        left: '-100%',
-        height: '100%',
-        width: '200%',
-        background: theme.color.white,
-        transform: 'rotate(-5deg)',
-      }}
-    />
+
     <div
       css={{
         width: '100%',
         backgroundColor: theme.color.offWhite,
-        overflow: 'hidden',
+        position: 'relative',
       }}
     >
+      <div
+        css={{
+          position: 'absolute',
+          top: '-50%',
+          left: '-100%',
+          height: '100%',
+          width: '300%',
+          background: theme.color.white,
+          transform: 'rotate(-5deg)',
+        }}
+      />
       <div
         css={{
           maxWidth: 1200,
@@ -70,19 +71,55 @@ const IndexPage = ({
         <div
           css={{
             position: 'relative',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            marginTop: '-25%',
+            width: '95%',
+            [theme.media.small]: {
+              width: '80%',
+            },
+            [theme.media.medium]: {
+              width: 500,
+            },
           }}
         >
           <HumanWalkingLeft
-            css={{ position: 'absolute', left: -360, bottom: -100 }}
+            css={{
+              position: 'absolute',
+              left: -100,
+              bottom: -300,
+              [theme.media.medium]: { left: -200, bottom: -300 },
+              [theme.media.large]: { left: -300, bottom: -350 },
+            }}
           />
           <HumanWalkingRight
-            css={{ position: 'absolute', right: -420, bottom: -250 }}
+            css={{
+              position: 'absolute',
+              right: -250,
+              bottom: -350,
+              [theme.media.medium]: { right: -300, bottom: -350 },
+              [theme.media.large]: { right: -400, bottom: -390 },
+            }}
           />
-          <LogoMaroon width={500} css={{ marginBottom: theme.space.medium }} />
-          <AnchorButton href="#learn-more">learn more</AnchorButton>
+          <div
+            css={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              position: 'relative',
+              top: -130,
+              [theme.media.small]: {
+                top: -100,
+              },
+              [theme.media.medium]: {
+                top: 0,
+              },
+            }}
+          >
+            <LogoMaroon
+              width="100%"
+              css={{ marginBottom: theme.space.medium }}
+            />
+            <AnchorButton href="#learn-more">learn more</AnchorButton>
+          </div>
         </div>
       </div>
     </div>
@@ -92,7 +129,10 @@ const IndexPage = ({
         maxWidth: 700,
         margin: `${theme.space.xxlarge} auto`,
         textAlign: 'center',
-        padding: `0 ${theme.space.xlarge}`,
+        padding: `0 ${theme.space.medium}`,
+        [theme.media.small]: {
+          padding: `0 ${theme.space.large}`,
+        },
       }}
     >
       <h1 id="learn-more" css={{ fontSize: theme.fontSize.xxlarge }}>
@@ -110,22 +150,27 @@ const IndexPage = ({
         profitable relationships with your customers.
       </p>
     </div>
-    <Img
-      sizes={firstImage.childImageSharp.sizes}
-      css={{
-        height: 600,
-        width: 'calc(100% + 10px)',
-        left: -5,
-        maxWidth: 1200,
-        margin: '0 auto',
-        borderRadius: theme.borderRadius,
-      }}
-    />
+    <div css={{ margin: '0 auto', maxWidth: 1200 }}>
+      <Img
+        sizes={firstImage.childImageSharp.sizes}
+        css={{
+          height: 600,
+          width: 'calc(100% + 10px)',
+          left: -5,
+
+          borderRadius: theme.borderRadius,
+        }}
+      />
+    </div>
+
     <div
       css={{
         maxWidth: 900,
         margin: `${theme.space.xxlarge} auto`,
-        padding: `0 ${theme.space.xlarge}`,
+        padding: `0 ${theme.space.medium}`,
+        [theme.media.small]: {
+          padding: `0 ${theme.space.large}`,
+        },
       }}
     >
       <h1
@@ -200,23 +245,26 @@ const IndexPage = ({
         </div>
       </div>
     </div>
-    <Img
-      sizes={secondImage.childImageSharp.sizes}
-      css={{
-        height: 600,
-        width: 'calc(100% + 10px)',
-        left: -5,
-        maxWidth: 1200,
-        margin: '0 auto',
-        borderRadius: theme.borderRadius,
-      }}
-      imgStyle={{ objectPosition: 'top center' }}
-    />
+    <div css={{ margin: '0 auto', maxWidth: 1200 }}>
+      <Img
+        sizes={secondImage.childImageSharp.sizes}
+        css={{
+          height: 600,
+          width: 'calc(100% + 10px)',
+          left: -5,
+          borderRadius: theme.borderRadius,
+        }}
+        imgStyle={{ objectPosition: '20% 50%' }}
+      />
+    </div>
     <div
       css={{
         maxWidth: 700,
         margin: `${theme.space.xxlarge} auto`,
-        padding: `0 ${theme.space.xlarge}`,
+        padding: `0 ${theme.space.medium}`,
+        [theme.media.small]: {
+          padding: `0 ${theme.space.large}`,
+        },
         textAlign: 'center',
       }}
     >
@@ -306,7 +354,7 @@ const IndexPage = ({
         </div>
       </div>
     </div>
-  </>
+  </div>
 )
 
 export const query = graphql`
